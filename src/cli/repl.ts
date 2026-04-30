@@ -156,8 +156,11 @@ export async function startREPL(): Promise<void> {
         continue;
       }
 
-      // Regular character — buffer only, printed by userPrompt on submit
-      inputBuffer += ch;
+      // Regular printable character — echo immediately
+      if (ch >= " ") {
+        inputBuffer += ch;
+        process.stdout.write(ch);
+      }
     }
   });
 }
