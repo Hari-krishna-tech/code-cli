@@ -1,0 +1,17 @@
+{
+  "model": "deepseek-chat",
+  "provider": "deepseek",
+  "workingDirectory": ".",
+  "tools": {
+    "readFile": true,
+    "writeFile": true,
+    "editFile": true,
+    "listFiles": true,
+    "runCommand": true,
+    "search": true
+  },
+  "requireConfirmation": {
+    "riskyCommand": true,
+    "outsideWorkingDir": true
+  }
+}

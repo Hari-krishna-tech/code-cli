@@ -1,0 +1,28 @@
+{
+  "name": "code-cli",
+  "version": "1.0.0",
+  "description": "AI-powered CLI coding agent similar to Claude Code",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "code-cli": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
