@@ -23,9 +23,27 @@ export async function startREPL(): Promise<void> {
   });
 
   let running = false;
+  let multiLineBuffer: string[] = [];
 
   const processInput = async (input: string): Promise<void> => {
-    const trimmed = input.trim();
+    // Multi-line continuation: line ending with backslash
+    if (input.endsWith("\\")) {
+      multiLineBuffer.push(input.slice(0, -1));
+      process.stdout.write(chalk.dim("    · "));
+      return;
+    }
+
+    // Accumulate if we have buffered lines
+    let fullInput: string;
+    if (multiLineBuffer.length > 0) {
+      multiLineBuffer.push(input);
+      fullInput = multiLineBuffer.join("\n");
+      multiLineBuffer = [];
+    } else {
+      fullInput = input;
+    }
+
+    const trimmed = fullInput.trim();
     if (!trimmed) {
       render.prompt();
       return;

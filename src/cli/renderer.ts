@@ -8,27 +8,28 @@ function formatCodeBlock(code: string, lang: string): string {
   return `\n${chalk.dim("┌─")}${chalk.dim("─".repeat(28))}${langTag}\n${formatted}\n${chalk.dim("└─")}${chalk.dim("─".repeat(28))}\n`;
 }
 
-const BOX_WIDTH = 80;
-const SEPARATOR = chalk.gray("─".repeat(BOX_WIDTH));
+const TERM_WIDTH = () => Math.min(process.stdout.columns || 80, 100);
 
 export function banner(): void {
   console.log("");
   console.log(
-    chalk.bold.white("  ⚡ code-cli ") +
-      chalk.gray("— AI-powered coding assistant")
+    chalk.bold.white("  code-cli ") + chalk.gray("— AI coding assistant")
   );
-  console.log(chalk.gray(`  Working directory: ${process.cwd()}`));
-  console.log(SEPARATOR);
+  console.log(chalk.gray(`  cwd: ${process.cwd()}`));
 }
 
 export function userPrompt(text: string): void {
   console.log("");
-  console.log(chalk.bold.white("  You ›"), chalk.bgHex("#2d2d2d").white(` ${text} `));
+  // Show multi-line user input with continuation markers
+  const lines = text.split("\n");
+  for (const line of lines) {
+    console.log(chalk.bold.hex("#d4a574")("  > ") + chalk.white(line));
+  }
   console.log("");
 }
 
 export function assistantThinking(): void {
-  process.stdout.write(chalk.gray("  🤖 Thinking..."));
+  process.stdout.write(chalk.dim("  ● ") + chalk.white("Thinking"));
 }
 
 export function assistantStreamToken(token: string): void {
@@ -74,8 +75,13 @@ export function infoMessage(msg: string): void {
   console.log(chalk.gray(`  ℹ ${msg}`));
 }
 
+export function inputSeparator(): void {
+  process.stdout.write("\n" + chalk.dim("─".repeat(TERM_WIDTH())) + "\n\n");
+}
+
 export function prompt(): void {
-  process.stdout.write(chalk.bold.yellow("\n  ⚡ "));
+  inputSeparator();
+  process.stdout.write(chalk.bold.hex("#d4a574")("  > "));
 }
 
 export function newline(): void {
@@ -108,6 +114,9 @@ export function helpText(): void {
   console.log(chalk.gray("  /clear         Clear conversation history"));
   console.log(chalk.gray("  /config        Show current configuration"));
   console.log(chalk.gray("  /exit, /quit   Exit code-cli"));
-  console.log(chalk.gray("  Ctrl+C         Exit"));
+  console.log(chalk.gray("  Ctrl+C         Interrupt / exit"));
+  console.log("");
+  console.log(chalk.bold("  Multi-line input:"));
+  console.log(chalk.gray("  End a line with \\ to continue on the next line"));
   console.log("");
 }
