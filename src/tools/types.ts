@@ -4,10 +4,19 @@ export interface ToolDefinition {
   parameters: Record<string, unknown>;
 }
 
+export interface DiffHunk {
+  oldStart: number;
+  oldLines: number;
+  newStart: number;
+  newLines: number;
+  lines: string[]; // lines starting with " ", "+", or "-"
+}
+
 export interface ToolResult {
   success: boolean;
   output: string;
   error?: string;
+  diff?: DiffHunk[];
 }
 
 export interface Tool {

@@ -1,7 +1,67 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { type Tool, type ToolResult } from "./types.js";
+import { type Tool, type ToolResult, type DiffHunk } from "./types.js";
 import { type Config, resolvePath } from "../utils/config.js";
 import { isWithinWorkingDir } from "./read-file.js";
+
+function computeDiff(oldStr: string, newStr: string): DiffHunk[] {
+  const oldLines = oldStr.split("\n");
+  const newLines = newStr.split("\n");
+
+  // Find common prefix
+  let prefix = 0;
+  while (prefix < oldLines.length && prefix < newLines.length && oldLines[prefix] === newLines[prefix]) {
+    prefix++;
+  }
+
+  // Find common suffix (after prefix)
+  let suffix = 0;
+  while (
+    suffix < oldLines.length - prefix &&
+    suffix < newLines.length - prefix &&
+    oldLines[oldLines.length - 1 - suffix] === newLines[newLines.length - 1 - suffix]
+  ) {
+    suffix++;
+  }
+
+  // Context lines to show before/after changes
+  const CONTEXT = 3;
+  const ctxStart = Math.max(0, prefix - CONTEXT);
+  const ctxEndOld = Math.min(oldLines.length, oldLines.length - suffix + CONTEXT);
+  const ctxEndNew = Math.min(newLines.length, newLines.length - suffix + CONTEXT);
+
+  const hunkLines: string[] = [];
+
+  // Context before
+  for (let i = ctxStart; i < prefix; i++) {
+    hunkLines.push(" " + oldLines[i]);
+  }
+
+  // Removed lines
+  for (let i = prefix; i < oldLines.length - suffix; i++) {
+    hunkLines.push("-" + oldLines[i]);
+  }
+
+  // Added lines
+  for (let i = prefix; i < newLines.length - suffix; i++) {
+    hunkLines.push("+" + newLines[i]);
+  }
+
+  // Context after
+  for (let i = oldLines.length - suffix; i < ctxEndOld; i++) {
+    hunkLines.push(" " + oldLines[i]);
+  }
+
+  const oldCount = oldLines.length - suffix - prefix;
+  const newCount = newLines.length - suffix - prefix;
+
+  return [{
+    oldStart: prefix + 1,
+    oldLines: oldCount,
+    newStart: prefix + 1,
+    newLines: newCount,
+    lines: hunkLines,
+  }];
+}
 
 export function createEditFileTool(config: Config): Tool {
   return {
@@ -73,9 +133,12 @@ export function createEditFileTool(config: Config): Tool {
               ? `${added} lines`
               : "0 line change";
 
+        const diff = computeDiff(oldStr, newStr);
+
         return {
           success: true,
           output: `Edited ${resolved} (${diffDesc}). Replacement successful.`,
+          diff,
         };
       } catch (err) {
         if ((err as NodeJS.ErrnoException).code === "ENOENT") {

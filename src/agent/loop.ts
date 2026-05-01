@@ -42,6 +42,7 @@ export async function runAgentLoop(
   options: AgentOptions,
   onText?: (text: string) => void,
   onToolCall?: (name: string, params: Record<string, unknown>) => void,
+  onToolResult?: (name: string, result: { output: string; diff?: import("../tools/types.js").DiffHunk[] }) => void,
 ): Promise<{ response: string; usage: TokenUsage }> {
   const { provider, registry, config, logger } = options;
 
@@ -110,6 +111,10 @@ export async function runAgentLoop(
 
         const result = await registry.execute(tc.function.name, params);
         logger.tool(tc.function.name, params, result.output);
+
+        if (onToolResult) {
+          onToolResult(tc.function.name, { output: result.output, diff: result.diff });
+        }
 
         messages.push({
           role: "tool",

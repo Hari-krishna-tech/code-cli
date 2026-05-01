@@ -12,7 +12,7 @@ export async function startREPL(): Promise<void> {
   const provider = createProvider(config);
   const registry = createToolRegistry(config);
 
-  render.banner();
+  render.welcome();
 
   // Switch stdin to raw mode for character-by-character control
   const stdin = process.stdin;
@@ -42,9 +42,10 @@ export async function startREPL(): Promise<void> {
       return;
     }
 
-    // Accumulate if we have buffered lines
+    const isMultiLine = multiLineBuffer.length > 0;
+
     let fullInput: string;
-    if (multiLineBuffer.length > 0) {
+    if (isMultiLine) {
       multiLineBuffer.push(input);
       fullInput = multiLineBuffer.join("\n");
       multiLineBuffer = [];
@@ -65,8 +66,14 @@ export async function startREPL(): Promise<void> {
       return;
     }
 
-    // Echo the user's input line (styled, once)
-    render.userPrompt(trimmed);
+    if (isMultiLine) {
+      // Multi-line: render styled since lines aren't visible from echo
+      render.userPrompt(trimmed);
+    } else {
+      // Single-line: already echoed in raw mode, just add spacing
+      console.log("");
+      console.log("");
+    }
     logger.user(trimmed);
 
     let toolCallCount = 0;
@@ -86,6 +93,9 @@ export async function startREPL(): Promise<void> {
         (name, params) => {
           toolCallCount++;
           render.toolCallStart(name, params);
+        },
+        (name, result) => {
+          render.toolCallResult(name, result);
         },
       );
 
@@ -177,7 +187,7 @@ async function handleCommand(
       break;
     case "/clear":
       console.clear();
-      render.banner();
+      render.welcome();
       break;
     case "/config":
       console.log("");
