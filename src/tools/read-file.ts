@@ -7,7 +7,7 @@ export function createReadFileTool(config: Config): Tool {
     definition: {
       name: "read_file",
       description:
-        "Read the contents of a file. Returns the file content as a string.",
+        "Read the contents of a file. Returns the file content as a string. IMPORTANT: Only use when you actually need the full file content. If you just need to know WHAT exists or WHERE a symbol is, use search instead — it's faster and uses fewer tool calls.",
       parameters: {
         type: "object",
         properties: {
