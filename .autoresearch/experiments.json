@@ -25,5 +25,63 @@
     ],
     "diffSummary": "src/agent/loop.ts | 25 +++++++++++++++++++------\n 1 file changed, 19 insertions(+), 6 deletions(-)",
     "success": true
+  },
+  {
+    "id": "exp-moydq7xq-a8c5bc99",
+    "timestamp": 1778333474969,
+    "branch": "exp-moydq7xq-a8c5bc99",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778333474926,
+      "evalScore": 0.56,
+      "avgTokens": 8887,
+      "avgLatencyMs": 12357,
+      "avgToolCalls": 3.5,
+      "successRate": 0.38
+    },
+    "result": {
+      "timestamp": 1778333474926,
+      "evalScore": 0.56,
+      "avgTokens": 8887,
+      "avgLatencyMs": 12357,
+      "avgToolCalls": 3.5,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 29 +++++++++++++++++++++++++++++\n src/agent/loop.ts              |  6 +++---\n 2 files changed, 32 insertions(+), 3 deletions(-)",
+    "success": true
+  },
+  {
+    "id": "exp-moydu36j-4920eb6f",
+    "timestamp": 1778333692625,
+    "branch": "exp-moydu36j-4920eb6f",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778333474926,
+      "evalScore": 0.56,
+      "avgTokens": 8887,
+      "avgLatencyMs": 12357,
+      "avgToolCalls": 3.5,
+      "successRate": 0.38
+    },
+    "result": {
+      "timestamp": 1778333692525,
+      "evalScore": 0.44,
+      "avgTokens": 12113,
+      "avgLatencyMs": 12533,
+      "avgToolCalls": 3.5,
+      "successRate": 0.25
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/tools/read-file.ts",
+      "src/tools/search.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 28 ++++++++++++++++++++++++++++\n src/agent/loop.ts              | 25 ++++++++++++-------------\n src/tools/read-file.ts         | 12 ++++++++++--\n src/tools/search.ts            |  2 +-\n 4 files changed, 51 insertions(+), 16 deletions(-)",
+    "success": false
   }
 ]

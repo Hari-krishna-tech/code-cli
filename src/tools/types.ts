@@ -28,7 +28,7 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
     name: "read_file",
     description:
-      "Read the contents of a file. Returns the file content as a string.",
+      "Read the contents of a file. Returns the file content as a string. IMPORTANT: Only use when you actually need the full file content. If you just need to know WHAT exists or WHERE a symbol is, use search instead — it's faster and uses fewer tool calls.",
     parameters: {
       type: "object",
       properties: {
@@ -122,7 +122,7 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
     name: "search",
     description:
-      "Search for a pattern in files. Like grep. Returns matching lines with file paths and line numbers.",
+      "Search for a pattern in files. Like grep. Returns matching lines with file paths and line numbers. PREFER THIS over read_file when you need to find where something is or what exists. Search results include file paths and line numbers — you can answer most 'where is X?' questions from search output alone without reading files.",
     parameters: {
       type: "object",
       properties: {

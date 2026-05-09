@@ -12,7 +12,7 @@ export function createSearchTool(config: Config): Tool {
     definition: {
       name: "search",
       description:
-        "Search for a pattern in files. Like grep. Returns matching lines with file paths and line numbers.",
+        "Search for a pattern in files. Like grep. Returns matching lines with file paths and line numbers. PREFER THIS over read_file when you need to find where something is or what exists. Search results include file paths and line numbers — you can answer most 'where is X?' questions from search output alone without reading files.",
       parameters: {
         type: "object",
         properties: {
