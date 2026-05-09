@@ -352,5 +352,229 @@
     ],
     "diffSummary": ".autoresearch/experiments.json | 28 ++++++++++++++++++++++++++\n src/agent/loop.ts              | 12 +++++++----\n src/llm/context.ts             | 45 +++++++++++++++++++++++-------------------\n 3 files changed, 61 insertions(+), 24 deletions(-)",
     "success": false
+  },
+  {
+    "id": "exp-moyfxxs6-3d8720a3",
+    "timestamp": 1778337179405,
+    "branch": "exp-moyfxxs6-3d8720a3",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 57 ++++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              | 12 ++++++---\n 2 files changed, 66 insertions(+), 3 deletions(-)",
+    "success": true
+  },
+  {
+    "id": "exp-moyg1hji-3f83e1db",
+    "timestamp": 1778337359722,
+    "branch": "exp-moyg1hji-3f83e1db",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778337359650,
+      "evalScore": 0.56,
+      "avgTokens": 13255,
+      "avgLatencyMs": 18043,
+      "avgToolCalls": 4.13,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 28 ++++++++++++++++++++++++++++\n src/agent/loop.ts              |  2 +-\n 2 files changed, 29 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyg5com-251629be",
+    "timestamp": 1778337519779,
+    "branch": "exp-moyg5com-251629be",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778337519693,
+      "evalScore": 0.56,
+      "avgTokens": 10653,
+      "avgLatencyMs": 14797,
+      "avgToolCalls": 3.25,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 56 ++++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |  2 +-\n 2 files changed, 57 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyg8s6k-5dd6b0f9",
+    "timestamp": 1778337681196,
+    "branch": "exp-moyg8s6k-5dd6b0f9",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778337681108,
+      "evalScore": 0.63,
+      "avgTokens": 14077,
+      "avgLatencyMs": 15536,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 84 ++++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |  2 +-\n 2 files changed, 85 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moygc8qh-36c24a32",
+    "timestamp": 1778337873454,
+    "branch": "exp-moygc8qh-36c24a32",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778337873353,
+      "evalScore": 0.56,
+      "avgTokens": 13444,
+      "avgLatencyMs": 17877,
+      "avgToolCalls": 4.5,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 112 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   2 +-\n 2 files changed, 113 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyggd2z-d5c5af86",
+    "timestamp": 1778338049394,
+    "branch": "exp-moyggd2z-d5c5af86",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778338049259,
+      "evalScore": 0.56,
+      "avgTokens": 13780,
+      "avgLatencyMs": 14598,
+      "avgToolCalls": 4.13,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 140 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   2 +-\n 2 files changed, 141 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moygk4u9-6eb08675",
+    "timestamp": 1778338235999,
+    "branch": "exp-moygk4u9-6eb08675",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778338235888,
+      "evalScore": 0.63,
+      "avgTokens": 16878,
+      "avgLatencyMs": 16692,
+      "avgToolCalls": 3.88,
+      "successRate": 0.5
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 168 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   3 +-\n 2 files changed, 170 insertions(+), 1 deletion(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moygo4u2-2a562362",
+    "timestamp": 1778338430756,
+    "branch": "exp-moygo4u2-2a562362",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778337179363,
+      "evalScore": 0.69,
+      "avgTokens": 14809,
+      "avgLatencyMs": 15234,
+      "avgToolCalls": 3.25,
+      "successRate": 0.63
+    },
+    "result": {
+      "timestamp": 1778338430660,
+      "evalScore": 0.63,
+      "avgTokens": 11806,
+      "avgLatencyMs": 18054,
+      "avgToolCalls": 4.25,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 196 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   2 +-\n 2 files changed, 197 insertions(+), 1 deletion(-)",
+    "success": false
   }
 ]
