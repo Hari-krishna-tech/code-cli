@@ -118,11 +118,17 @@ export async function runAgentLoop(
           onToolResult(tc.function.name, { output: result.output, diff: result.diff });
         }
 
+        // Truncate tool output at insertion time to avoid sending
+        // large outputs to the LLM even on the first turn after execution.
+        const MAX_TOOL_OUTPUT_CHARS = 8000;
+        const rawOutput = result.success ? result.output : `Error: ${result.error}`;
+        const truncatedContent = rawOutput.length > MAX_TOOL_OUTPUT_CHARS
+          ? rawOutput.slice(0, MAX_TOOL_OUTPUT_CHARS) + `\n[truncated: ${rawOutput.length - MAX_TOOL_OUTPUT_CHARS} more characters...]`
+          : rawOutput;
+
         messages.push({
           role: "tool",
-          content: result.success
-            ? result.output
-            : `Error: ${result.error}`,
+          content: truncatedContent,
           tool_call_id: tc.id,
           name: tc.function.name,
         });

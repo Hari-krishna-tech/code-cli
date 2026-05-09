@@ -295,5 +295,62 @@
     ],
     "diffSummary": ".autoresearch/experiments.json | 182 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   6 +-\n src/tools/search.ts            |  21 +++--\n src/tools/types.ts             |   2 +-\n 4 files changed, 202 insertions(+), 9 deletions(-)",
     "success": false
+  },
+  {
+    "id": "exp-moyfphwi-d8e02633",
+    "timestamp": 1778336801146,
+    "branch": "exp-moyfphwi-d8e02633",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778336619963,
+      "evalScore": 0.63,
+      "avgTokens": 9733,
+      "avgLatencyMs": 14782,
+      "avgToolCalls": 3.88,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778336801053,
+      "evalScore": 0.56,
+      "avgTokens": 14105,
+      "avgLatencyMs": 15723,
+      "avgToolCalls": 3.88,
+      "successRate": 0.38
+    },
+    "changes": [
+      "src/autoresearch/presets.ts",
+      "src/llm/context.ts"
+    ],
+    "diffSummary": "src/autoresearch/presets.ts | 4 ++--\n src/llm/context.ts          | 6 +++---\n 2 files changed, 5 insertions(+), 5 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyftdoi-3689b9ed",
+    "timestamp": 1778337013820,
+    "branch": "exp-moyftdoi-3689b9ed",
+    "prompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one change that reduces total token usage per turn by at least 15%. Ideas: truncate tool outputs earlier, compress system prompt, reduce duplicate file reads, cache file contents across turns. Make ONE change. Do not break existing functionality.",
+    "baseline": {
+      "timestamp": 1778336619963,
+      "evalScore": 0.63,
+      "avgTokens": 9733,
+      "avgLatencyMs": 14782,
+      "avgToolCalls": 3.88,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778337013720,
+      "evalScore": 0.5,
+      "avgTokens": 11210,
+      "avgLatencyMs": 15764,
+      "avgToolCalls": 4.25,
+      "successRate": 0.25
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/llm/context.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 28 ++++++++++++++++++++++++++\n src/agent/loop.ts              | 12 +++++++----\n src/llm/context.ts             | 45 +++++++++++++++++++++++-------------------\n 3 files changed, 61 insertions(+), 24 deletions(-)",
+    "success": false
   }
 ]
