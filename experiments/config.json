@@ -1,0 +1,79 @@
+{
+  "maxIterations": 10,
+  "minScoreDelta": 0.05,
+  "improvementPrompt": "Analyze src/agent/loop.ts and src/llm/context.ts. Find one concrete change that reduces average token usage by at least 10% without lowering the agent's success rate on file-reading and code-search tasks. Make the change. Do not break any existing functionality.",
+  "evals": [
+    {
+      "name": "read-and-summarize",
+      "description": "Agent reads a source file and accurately summarizes its purpose",
+      "prompt": "Read src/agent/loop.ts and tell me in one sentence what the runAgentLoop function does. Be specific about the loop mechanism.",
+      "expectedOutput": ["tool", "turn", "provider", "message"],
+      "expectedFiles": [],
+      "maxToolCalls": 3,
+      "timeout": 30000
+    },
+    {
+      "name": "search-accuracy",
+      "description": "Agent uses search to find all definition/usage sites of a symbol",
+      "prompt": "Find all files that import or use 'createProvider'. List each file and the line where it appears.",
+      "expectedOutput": [".ts", "createProvider", "provider"],
+      "expectedFiles": [],
+      "maxToolCalls": 5,
+      "timeout": 30000
+    },
+    {
+      "name": "tool-selection",
+      "description": "Agent picks the most efficient tool for the job",
+      "prompt": "What function in this codebase handles context trimming? Tell me the function name and which file it's in. Use the most efficient tool — do NOT read files one by one.",
+      "expectedOutput": ["trim", "context", "ContextManager"],
+      "expectedFiles": [],
+      "maxToolCalls": 2,
+      "timeout": 15000
+    },
+    {
+      "name": "multi-step-chain",
+      "description": "Agent chains tools: list dir → read file → reason about content",
+      "prompt": "First list the src/tools/ directory. Then read the file that handles editing. Tell me what validation the edit tool performs before writing.",
+      "expectedOutput": ["old_string", "unique", "not found", "outside"],
+      "expectedFiles": [],
+      "maxToolCalls": 5,
+      "timeout": 30000
+    },
+    {
+      "name": "error-recovery",
+      "description": "Agent recovers from a failed tool call instead of repeating it",
+      "prompt": "Read the file src/nonexistent-12345.ts. If it fails, explain why it failed and try a different approach to find what you need.",
+      "expectedOutput": ["not exist", "not found", "error", "cannot"],
+      "expectedFiles": [],
+      "maxToolCalls": 2,
+      "timeout": 15000
+    },
+    {
+      "name": "codebase-reasoning",
+      "description": "Agent synthesizes information from multiple files",
+      "prompt": "How does a user prompt flow through the system? Trace the path from index.ts through to an LLM API call and back. Name every file involved and its role.",
+      "expectedOutput": ["index.ts", "repl.ts", "loop.ts", "provider", "deepseek"],
+      "expectedFiles": [],
+      "maxToolCalls": 8,
+      "timeout": 45000
+    },
+    {
+      "name": "no-hallucination",
+      "description": "Agent does not invent functions or files that don't exist",
+      "prompt": "Does this project have a function called 'optimizePrompt'? Search for it and tell me definitively yes or no.",
+      "expectedOutput": ["no", "not found", "does not", "no match"],
+      "expectedFiles": [],
+      "maxToolCalls": 2,
+      "timeout": 15000
+    },
+    {
+      "name": "config-awareness",
+      "description": "Agent understands project configuration and tool toggles",
+      "prompt": "Read src/utils/config.ts and tell me: what tools can be toggled on/off, and what happens when a tool is disabled?",
+      "expectedOutput": ["tool", "readFile", "writeFile", "editFile", "boolean", "true", "false"],
+      "expectedFiles": [],
+      "maxToolCalls": 3,
+      "timeout": 20000
+    }
+  ]
+}

@@ -160,6 +160,107 @@ src/
     └── logger.ts        # Structured logger + token estimator
 ```
 
+## Autoresearch
+
+Automated experiment loop — AI modifies code, runs evals, keeps improvements, reverts failures. Inspired by [karpathy/autoresearch](https://github.com/karpathy/autoresearch).
+
+### Concept
+
+```
+main
+ └── experiment branch (exp-<timestamp>-<random>)
+      ├── AI modifies code via headless agent
+      ├── run eval suite → MetricSnapshot
+      ├── score > baseline?
+      ├── KEEP   → git commit, update baseline
+      └── REVERT → git reset --hard, delete branch
+                   ↑ repeat N times
+```
+
+### CLI commands
+
+```bash
+code-cli --run "improve tool selection accuracy"
+code-cli --eval
+code-cli --experiment
+code-cli --experiment --experiment-iterations 20
+code-cli --experiment --experiment-prompt "reduce token usage by 15%"
+code-cli --experiment --experiment-config ./experiments/config.json
+```
+
+### Architecture
+
+```
+src/autoresearch/
+├── types.ts        # EvalCase, EvalResult, MetricSnapshot, ExperimentRecord
+├── git.ts          # Zero-dep git sandboxing (branch, commit, revert)
+├── runner.ts       # Non-interactive agent runner (headless)
+├── evaluator.ts    # Eval harness with pass/fail scoring + 5 built-in evals
+├── store.ts        # JSON-file experiment history with trend detection
+└── loop.ts         # Main experiment loop orchestrator
+```
+
+### Experiment config
+
+```json
+{
+  "maxIterations": 10,
+  "minScoreDelta": 0.01,
+  "improvementPrompt": "Analyze src/agent/loop.ts. Find one concrete improvement that reduces average tool calls by 20% without lowering success rate. Make the change.",
+  "evals": [
+    {
+      "name": "read-existing-file",
+      "description": "Agent can read an existing source file",
+      "prompt": "Read src/index.ts and summarize it in one sentence.",
+      "expectedOutput": ["entry point", "REPL"],
+      "expectedFiles": [],
+      "maxToolCalls": 3,
+      "timeout": 30000
+    }
+  ]
+}
+```
+
+### Eval metrics tracked
+
+| Metric | What it measures |
+|--------|-----------------|
+| `evalScore` | Aggregate pass/fail score across all eval cases (0..1) |
+| `successRate` | Percentage of eval cases fully passed |
+| `avgTokens` | Average tokens consumed per eval case |
+| `avgLatencyMs` | Average wall-clock time per eval case |
+| `avgToolCalls` | Average tool calls per eval case |
+
+### Built-in evals
+
+Start with 5 generic evals (read, list, search, explain, no-hallucination). Replace with project-specific evals for real results — eval quality determines experiment quality.
+
+### Experiment store
+
+Records stored in `.autoresearch/experiments.json`. Each record:
+
+```json
+{
+  "id": "exp-m7f3k2a1-abc12345",
+  "timestamp": 1715299200000,
+  "branch": "exp-m7f3k2a1-abc12345",
+  "prompt": "reduce token usage by 15%",
+  "baseline": { "evalScore": 0.71, "successRate": 0.6, "avgTokens": 4500, "avgLatencyMs": 3200, "avgToolCalls": 4.2 },
+  "result":   { "evalScore": 0.79, "successRate": 0.8, "avgTokens": 3800, "avgLatencyMs": 2900, "avgToolCalls": 3.1 },
+  "changes": ["src/agent/loop.ts", "src/llm/context.ts"],
+  "diffSummary": "2 files changed, 15 insertions(+), 8 deletions(-)",
+  "success": true
+}
+```
+
+### Critical design rules
+
+1. **AI never touches main** — all changes happen on experiment branches
+2. **Evals first** — without measurable criteria, autoresearch is random vibe coding
+3. **Specific goals** — "reduce token usage by 15%" not "improve the project"
+4. **Small deltas** — one focused change per iteration beats sweeping refactors
+5. **Sandbox everything** — never let agent touch `.env`, deployment configs, or billing code
+
 ## Security
 
 - **Sandboxing**: File access restricted to working directory (configurable)
