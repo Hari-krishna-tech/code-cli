@@ -83,5 +83,217 @@
     ],
     "diffSummary": ".autoresearch/experiments.json | 28 ++++++++++++++++++++++++++++\n src/agent/loop.ts              | 25 ++++++++++++-------------\n src/tools/read-file.ts         | 12 ++++++++++--\n src/tools/search.ts            |  2 +-\n 4 files changed, 51 insertions(+), 16 deletions(-)",
     "success": false
+  },
+  {
+    "id": "exp-moydyr4q-831c9523",
+    "timestamp": 1778334255312,
+    "branch": "exp-moydyr4q-831c9523",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/llm/deepseek.ts",
+      "src/tools/read-file.ts",
+      "src/tools/search.ts",
+      "src/tools/types.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 58 +++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              | 61 +++++++++++++++++-------------------------\n src/llm/deepseek.ts            | 17 ++++++------\n src/tools/read-file.ts         |  2 +-\n src/tools/search.ts            |  2 +-\n src/tools/types.ts             |  4 +--\n 6 files changed, 95 insertions(+), 49 deletions(-)",
+    "success": true
+  },
+  {
+    "id": "exp-moyeatap-29bb2142",
+    "timestamp": 1778334467484,
+    "branch": "exp-moyeatap-29bb2142",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778334467387,
+      "evalScore": 0.56,
+      "avgTokens": 12235,
+      "avgLatencyMs": 12280,
+      "avgToolCalls": 3.75,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/llm/deepseek.ts",
+      "src/tools/search.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 32 ++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |  5 ++++-\n src/llm/deepseek.ts            |  2 +-\n src/tools/search.ts            |  3 ++-\n 4 files changed, 39 insertions(+), 3 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyefd0k-cd55ddf9",
+    "timestamp": 1778334637194,
+    "branch": "exp-moyefd0k-cd55ddf9",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778334637104,
+      "evalScore": 0.56,
+      "avgTokens": 11127,
+      "avgLatencyMs": 12415,
+      "avgToolCalls": 4.13,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 62 ++++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              | 10 +++----\n 2 files changed, 67 insertions(+), 5 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyeizys-776d5d53",
+    "timestamp": 1778334837261,
+    "branch": "exp-moyeizys-776d5d53",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778334837179,
+      "evalScore": 0.5,
+      "avgTokens": 8912,
+      "avgLatencyMs": 11612,
+      "avgToolCalls": 3.5,
+      "successRate": 0.25
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/tools/read-file.ts",
+      "src/tools/search.ts",
+      "src/tools/types.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 90 ++++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              | 19 +++++----\n src/tools/read-file.ts         |  2 +-\n src/tools/search.ts            |  2 +-\n src/tools/types.ts             |  4 +-\n 5 files changed, 105 insertions(+), 12 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyenac6-b6935ee7",
+    "timestamp": 1778335253798,
+    "branch": "exp-moyenac6-b6935ee7",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778335253700,
+      "evalScore": 0.56,
+      "avgTokens": 12230,
+      "avgLatencyMs": 13069,
+      "avgToolCalls": 3.5,
+      "successRate": 0.38
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/tools/read-file.ts",
+      "src/tools/search.ts",
+      "src/tools/types.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 121 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |  21 +++----\n src/tools/read-file.ts         |   2 +-\n src/tools/search.ts            |  18 +++++-\n src/tools/types.ts             |   4 +-\n 5 files changed, 151 insertions(+), 15 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyew7qm-10720f15",
+    "timestamp": 1778335443216,
+    "branch": "exp-moyew7qm-10720f15",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778335443143,
+      "evalScore": 0.38,
+      "avgTokens": 8501,
+      "avgLatencyMs": 11108,
+      "avgToolCalls": 3.25,
+      "successRate": 0.13
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/tools/read-file.ts",
+      "src/tools/search.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 152 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |  38 ++++-------\n src/tools/read-file.ts         |   2 +-\n src/tools/search.ts            |   2 +-\n 4 files changed, 169 insertions(+), 25 deletions(-)",
+    "success": false
+  },
+  {
+    "id": "exp-moyf09w8-88c6b68f",
+    "timestamp": 1778335937025,
+    "branch": "exp-moyf09w8-88c6b68f",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778334255251,
+      "evalScore": 0.63,
+      "avgTokens": 13145,
+      "avgLatencyMs": 12684,
+      "avgToolCalls": 4,
+      "successRate": 0.5
+    },
+    "result": {
+      "timestamp": 1778335936924,
+      "evalScore": 0.63,
+      "avgTokens": 12264,
+      "avgLatencyMs": 13170,
+      "avgToolCalls": 3.88,
+      "successRate": 0.5
+    },
+    "changes": [
+      ".autoresearch/experiments.json",
+      "src/agent/loop.ts",
+      "src/tools/search.ts",
+      "src/tools/types.ts"
+    ],
+    "diffSummary": ".autoresearch/experiments.json | 182 +++++++++++++++++++++++++++++++++++++++++\n src/agent/loop.ts              |   6 +-\n src/tools/search.ts            |  21 +++--\n src/tools/types.ts             |   2 +-\n 4 files changed, 202 insertions(+), 9 deletions(-)",
+    "success": false
   }
 ]
