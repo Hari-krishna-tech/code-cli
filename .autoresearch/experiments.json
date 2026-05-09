@@ -1,0 +1,29 @@
+[
+  {
+    "id": "exp-moydlvke-2947f822",
+    "timestamp": 1778333294507,
+    "branch": "exp-moydlvke-2947f822",
+    "prompt": "The agent currently passes only 38% of eval cases. Analyze failures: (1) tool-selection: agent uses search then reads file anyway, (2) error-recovery: agent doesn't clearly report errors, (3) codebase-reasoning: agent reads too many files (14 tool calls), (4) no-hallucination: agent doesn't give definitive 'no', (5) config-awareness: agent misses key details. Fix ONE of these. Make the change and ensure existing evals still pass.",
+    "baseline": {
+      "timestamp": 1778333294458,
+      "evalScore": 0.5,
+      "avgTokens": 21288,
+      "avgLatencyMs": 14500,
+      "avgToolCalls": 4.38,
+      "successRate": 0.38
+    },
+    "result": {
+      "timestamp": 1778333294458,
+      "evalScore": 0.5,
+      "avgTokens": 21288,
+      "avgLatencyMs": 14500,
+      "avgToolCalls": 4.38,
+      "successRate": 0.38
+    },
+    "changes": [
+      "src/agent/loop.ts"
+    ],
+    "diffSummary": "src/agent/loop.ts | 25 +++++++++++++++++++------\n 1 file changed, 19 insertions(+), 6 deletions(-)",
+    "success": true
+  }
+]
